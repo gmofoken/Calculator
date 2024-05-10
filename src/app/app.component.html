@@ -36,7 +36,7 @@
             <tr>
               <td class="keys numkey" (click)="pressKey('1')">1</td>  
               <td class="keys numkey" (click)="pressKey('2')">2</td>
-              <td class="keys numkey" (click)="pressKey('2')">3</td>  
+              <td class="keys numkey" (click)="pressKey('3')">3</td>  
               <td class="keys opkey" (click)="pressKey('+')">+</td>
             </tr>
             <tr>
@@ -49,6 +49,24 @@
       </div>
     </div>
     <div class="col-md-4">
+      <div class="keypad">
+        <div hidden>
+          <span ng->History</span><br>
+        </div>
+        <div class="row">
+          <div class="col-md-6" (click)="History()">
+            <span class="btn btn-dark">History</span> 
+          </div>
+          <div class="col-md-6" (click)="Memory()">
+            <span class="btn btn-dark">Memory</span> 
+          </div>
+          
+        </div>
+        <div style="height: 20px !important;"></div>
+        <div id="History" class="row" >
+          <div [innerHTML]="SideText"></div>
+        </div>
+      </div>
       
     </div>
     <div class="col-md-2"></div>

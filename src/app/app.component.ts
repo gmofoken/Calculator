@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,11 +16,26 @@ export class AppComponent {
   calculationString = '';
   memory = '';
   apiResult = '';
+  HistoryText = '';
+  MemoryText = '';
+  SideText = '';
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { 
+    this.History();
+  }
 
   pressKey(key: string) {
     this.mainDisplayText += key;
+  }
+
+  History(){
+      this.SideText = this.HistoryText;
+      console.log(this.SideText);
+  }
+
+  Memory(){
+    this.SideText = this.MemoryText;
+    console.log(this.SideText);
   }
 
   allClear() {
@@ -39,21 +55,29 @@ export class AppComponent {
 
 
     this.memory = this.apiResult;
-    console.log(this.memory);
   }
 
   MemoryStore(){
     this.memory = this.subDisplayText;
+    var appendElement = '<div>'+ this.memory  + '</div>' ;
+    this.MemoryText = appendElement + this.MemoryText;
+    this.Memory();
   }
 
   async getAnswer() {
-    console.log(this.getResult(this.mainDisplayText));
-    this.subDisplayText = this.apiResult;
+    this.subDisplayText = await this.getResult(this.mainDisplayText);
+
+    alert(this.subDisplayText);
+
+    var appendElement = '<div>'+ this.mainDisplayText+' <br/> =' + this.subDisplayText  + '</div>' ;
+    this.HistoryText += appendElement;
   }
 
   getResult(param : string) {
     const headers = new HttpHeaders().append('Access-Control-Allow-Origin', '*');
     const params = new HttpParams().append('input', param);
+
+    console.log(param);
 
     if (param){
 
