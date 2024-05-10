@@ -46,13 +46,7 @@ export class AppComponent {
   }
 
   async memoryArithmetic(input: string){
-    console.log(this.memory);
-    console.log(input);
-    console.log(this.mainDisplayText);
-    this.getResult(this.memory + input + this.mainDisplayText);
-
-
-    this.memory = this.apiResult;
+    this.getResult(this.mainDisplayText + input + this.memory, true);
   }
 
   MemoryStore(){
@@ -64,24 +58,35 @@ export class AppComponent {
 
   getAnswer() {
     this.getResult(this.mainDisplayText);
+  }
 
-    setTimeout(function() {
-  }, 3000);
+  setMemory(){
+    this.memory = this.apiResult;
+    this.Memory();
+  }
 
+  populateHistory(){
     var appendElement = '<div>'+ this.mainDisplayText+' <br/> =' + this.apiResult  + '</div>' ;
     this.HistoryText += appendElement;
     this.History();
   }
 
-  getResult(param : string) {
+  getResult(param : string, isMem : boolean = false) {
     const params = new HttpParams().append('input', param);
 
     if (param){
 
         this.httpClient.get<string>('https://localhost:44338/Calculator/calculate', { params: params }).subscribe({
           next: (res: any)=>{
+            
+              
             this.apiResult = res;
             this.subDisplayText = res;
+
+            if (isMem)
+              this.setMemory();
+            else
+             this.populateHistory();
           },
           error: (err: any)=>{
             this.apiResult  = err;
