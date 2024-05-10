@@ -1,15 +1,6 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <div class="container">
   <div class="row">
-    <div class="col-md-4"></div>
+    <div class="col-md-2"></div>
     <div class="col-md-4">
       <div class="base">
         <div class="maindisplay">
@@ -19,14 +10,22 @@
         <div class="keypad">
           <table style="width: 100%;">
             <tr>
-              <td class="keys ackey" colspan="3" (click)="allClear()">AC</td>
+              <td class="keys ackey" colspan="1" (click)="allClear()">AC</td>
+              <td class="keys opkey" colspan="1" (click)="MemoryStore()">MS</td>
+              <td class="keys opkey" colspan="1" (click)="memoryArithmetic('+')">M+</td>
+              <td class="keys opkey" colspan="1" (click)="memoryArithmetic('-')">M-</td>
+            </tr>
+            <tr>
+              <td class="keys opkey" colspan="1" (click)="pressKey(&#39;(&#39;)">(</td>  
+              <td class="keys opkey" colspan="1" (click)="pressKey(&#39;)&#39;)">)</td>
+              <td class="keys opkey" colspan="1" (click)="MemoryRecall()">MR</td>  
               <td class="keys opkey" colspan="1" (click)="pressKey('/')">/</td>
             </tr>
             <tr>
               <td class="keys numkey" (click)="pressKey('7')">7</td>  
               <td class="keys numkey" (click)="pressKey('8')">8</td>
               <td class="keys numkey" (click)="pressKey('9')">9</td>  
-              <td class="keys opkey" (click)="pressKey('x')">x</td>
+              <td class="keys opkey" (click)="pressKey('*')">*</td>
             </tr>
             <tr>
               <td class="keys numkey" (click)="pressKey('4')">4</td>  
@@ -35,9 +34,9 @@
               <td class="keys opkey" (click)="pressKey('-')">-</td>
             </tr>
             <tr>
-              <td class="keys numkey" (click)="pressKey('3')">3</td>  
-              <td class="keys numkey" (click)="pressKey('2')">2</td>
               <td class="keys numkey" (click)="pressKey('1')">1</td>  
+              <td class="keys numkey" (click)="pressKey('2')">2</td>
+              <td class="keys numkey" (click)="pressKey('2')">3</td>  
               <td class="keys opkey" (click)="pressKey('+')">+</td>
             </tr>
             <tr>
@@ -49,6 +48,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      
+    </div>
+    <div class="col-md-2"></div>
   </div>
 </div>
