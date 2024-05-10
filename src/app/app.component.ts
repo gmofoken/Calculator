@@ -30,12 +30,10 @@ export class AppComponent {
 
   History(){
       this.SideText = this.HistoryText;
-      console.log(this.SideText);
   }
 
   Memory(){
     this.SideText = this.MemoryText;
-    console.log(this.SideText);
   }
 
   allClear() {
@@ -64,26 +62,26 @@ export class AppComponent {
     this.Memory();
   }
 
-  async getAnswer() {
-    this.subDisplayText = await this.getResult(this.mainDisplayText);
+  getAnswer() {
+    this.getResult(this.mainDisplayText);
 
-    alert(this.subDisplayText);
+    setTimeout(function() {
+  }, 3000);
 
-    var appendElement = '<div>'+ this.mainDisplayText+' <br/> =' + this.subDisplayText  + '</div>' ;
+    var appendElement = '<div>'+ this.mainDisplayText+' <br/> =' + this.apiResult  + '</div>' ;
     this.HistoryText += appendElement;
+    this.History();
   }
 
   getResult(param : string) {
-    const headers = new HttpHeaders().append('Access-Control-Allow-Origin', '*');
     const params = new HttpParams().append('input', param);
-
-    console.log(param);
 
     if (param){
 
-        this.httpClient.get('https://localhost:44338/Calculator/calculate', { params: params }).subscribe({
+        this.httpClient.get<string>('https://localhost:44338/Calculator/calculate', { params: params }).subscribe({
           next: (res: any)=>{
             this.apiResult = res;
+            this.subDisplayText = res;
           },
           error: (err: any)=>{
             this.apiResult  = err;
@@ -92,7 +90,6 @@ export class AppComponent {
 
       
     }
-    return this.apiResult ;
     
   }
 }
