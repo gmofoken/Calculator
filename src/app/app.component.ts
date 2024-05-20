@@ -76,7 +76,7 @@ export class AppComponent {
 
     if (param){
 
-        this.httpClient.get<string>('https://localhost:44338/Calculator/calculate', { params: params }).subscribe({
+        this.httpClient.get<string>('https://calculatorweb20240520025708.azurewebsites.net/Calculator/calculate', { params: params }).subscribe({
           next: (res: any)=>{
             
               
